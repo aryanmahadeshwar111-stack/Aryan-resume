@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Mahadeshwar - Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #E3F2FD 0%, #1976D2 100%); /* Tech-blue gradient background */
+            color: #FFFFFF; /* White text on blue backgrounds */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transitions for dark mode */
+        }
+        body.dark-mode {
+            background: linear-gradient(135deg, #0D47A1 0%, #000000 100%); /* Darker blue to black gradient for dark mode */
+            color: #FFFFFF;
+        }
+        .header {
+            background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%); /* Deep blue gradient header */
+            color: #FFFFFF;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .download-btn, .dark-mode-toggle {
+            background-color: #FFFFFF;
+            color: #1976D2;
+            border: 1px solid #1976D2;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .download-btn:hover, .dark-mode-toggle:hover {
+            background-color: #1976D2;
+            color: #FFFFFF;
+        }
+        body.dark-mode .download-btn, body.dark-mode .dark-mode-toggle {
+            background-color: #0D47A1;
+            color: #FFFFFF;
+            border-color: #FFFFFF;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white overlay for content readability */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        body.dark-mode .container {
+            background-color: rgba(0, 0, 0, 0.9); /* Dark overlay in dark mode */
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tab-button {
+            background: linear-gradient(135deg, #E3F2FD 0%, #1976D2 100%); /* Blue gradient buttons */
+            border: 1px solid #1976D2;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode .tab-button {
+            background: linear-gradient(135deg, #0D47A1 0%, #000000 100%);
+            color: #FFFFFF;
+            border-color: #FFFFFF;
+        }
+        .tab-button.active {
+            background-color: #1976D2;
+            color: #FFFFFF;
+        }
+        body.dark-mode .tab-button.active {
+            background-color: #0D47A1;
+            color: #FFFFFF;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .about-me {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333333; /* Dark grey text for readability on white overlay */
+        }
+        body.dark-mode .about-me {
+            color: #FFFFFF;
+        }
+        .skills {
+            margin-top: 20px;
+        }
+        .skills ul {
+            list-style: none;
+            padding: 0;
+        }
+        .skills li {
+            background-color: #E3F2FD; /* Light blue for skills */
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            color: #1976D2;
+        }
+        body.dark-mode .skills li {
+            background-color: #0D47A1;
+            color: #FFFFFF;
+        }
+        .timeline {
+            margin-top: 20px;
+            position: relative;
+            color: #333333;
+        }
+        body.dark-mode .timeline {
+            color: #FFFFFF;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background-color: #1976D2;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            margin: 20px 0;
+            position: relative;
+            width: 50%;
+            left: 0;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: right;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            background-color: #1976D2;
+            border-radius: 50%;
+            right: -5px;
+        }
+        .timeline-item:nth-child(even)::before {
+            left: -5px;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            border: 1px solid #1976D2;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #E3F2FD;
+            color: #1976D2;
+        }
+        body.dark-mode .project-card {
+            background-color: #0D47A1;
+            border-color: #FFFFFF;
+            color: #FFFFFF;
+        }
+        .project-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .contact-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #1976D2;
+            border-radius: 5px;
+            background-color: #FFFFFF;
+            color: #333333;
+        }
+        body.dark-mode .contact-form input, body.dark-mode .contact-form textarea {
+            background-color: #0D47A1;
+            color: #FFFFFF;
+            border-color: #FFFFFF;
+        }
+        .contact-form button {
+            background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        body.dark-mode .contact-form button {
+            background: linear-gradient(135deg, #0D47A1 0%, #000000 100%);
+        }
+        .thanks {
+            font-size: 24px;
+            animation: fadeIn 2s ease-in-out;
+            color: #333333;
+        }
+        body.dark-mode .thanks {
+            color: #FFFFFF;
+        }
+        .thanks-icon {
+            font-size: 50px;
+            animation: bounce 1s infinite;
+        }
+        .footer {
+            background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+            color: #FFFFFF;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .footer a {
+            color: #FFFFFF;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        @media (max-width: 600px) {
+            .tabs { flex-direction: column; }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 80%; left: 20px; text-align: left; }
+            .timeline-item:nth-child(even) { left: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Aryan Mahadeshwar</h1>
+        <div class="actions">
+            <button class="download-btn" onclick="downloadResume()">Download Resume</button>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab(0)">About Me</button>
+            <button class="tab-button" onclick="showTab(1)">Contact</button>
+            <button class="tab-button" onclick="showTab(2)">Thanks</button>
+            <button class="tab-button" onclick="showTab(3)">Projects</button>
+        </div>
+        
+        <div id="tab-0" class="tab-content active">
+            <h2>About Me</h2>
+            <p class="about-me">
+                Hi! I’m Aryan Mahadeshwar, a B.Tech student at Shah & Anchor Kutchhi Engineering College, specializing in Advanced Communication Technology. I’m passionate about software development, communication systems, and exploring how technology can create smarter and more connected solutions.
+            </p>
+            
+            <div class="skills">
+                <h3>Skills</h3>
+                <ul>
+                    <li>Programming: JavaScript, Python, HTML/CSS</li>
+                    <li>Tools: Git, VS Code, Communication Systems</li>
+                    <li>Soft Skills: Problem-Solving, Team Collaboration</li>
+                    <!-- Add your real skills here -->
+                </ul>
+            </div>
+            
+            <div class="timeline">
+                <h3>Education & Timeline</h3>
+                <div class="timeline-item">
+                    <h4>2023 - 2024</h4>
+                    <p>Third Year B.Tech in Advanced Communication Technology at Shah & Anchor Kutchhi Engineering College</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2021 - 2023</h4>
+                    <p>Diploma in Information Technology from Vidyalankar Polytechnic College, Mumbai</p>
+                </div>
+                <!-- Add more timeline items as needed -->
+            </div>
+        </div>
+        
+        <div id="tab-1" class="tab-content">
+            <h2>Send Me a Message</h2>
+            <form class="contact-form" action="mailto:aryanmahadeshwar111@gmail.com" method="post" enctype="text/plain">
+                <input type="email" name="sender_email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <p>Note: This will open your email client to send the message.</p>
+        </div>
+        
+        <div id="tab-2" class="tab-content">
+            <h2>Thanks for Visiting!</h2>
+            <div class="thanks">
+                <div class="thanks-icon">🙏</div>
+                <p>We appreciate you checking out my resume. Feel free to connect!</p>
+            </div>
+        </div>
+        
+        <div id="tab-3" class="tab-content">
+            <h2>Projects Portfolio</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/250x150" alt="Project 1"> <!-- Replace with real image URL -->
+                    <h4>Project 1: Resume Website</h4>
+                    <p>A responsive website built with HTML/CSS/JS for showcasing resumes.</p>
+                    <a href="https://github.com/yourusername/project1" target="_blank">View on GitHub</a>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/250x150" alt="Project 2"> <!-- Replace with real image URL -->
+                    <h4>Project 2: Communication App</h4>
+                    <p>An app for advanced communication systems using Python.</p>
+                    <a href="https://github.com/yourusername/project2" target="_blank">View on GitHub</a>
+                </div>
+                <!-- Add more project cards as needed -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Connect with me:</p>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> |
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a> |
+        <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
+        <!-- Update links with your real profiles -->
+    </div>
+
+    <script>
+        function showTab(tabIndex) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            tabs[tabIndex].classList.add('active');
+            buttons[tabIndex].classList.add('active');
+        }
+        
+        function downloadResume() {
+            const link = document.createElement('a');
+            link.href = 'resume.pdf'; // Ensure resume.pdf is in the same folder
+            link.download = 'Aryan_Mahadeshwar_Resume.pdf';
+            link.click();
+        }
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+        
+        // Load dark mode preference on page load
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
